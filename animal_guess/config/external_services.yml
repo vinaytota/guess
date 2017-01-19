@@ -1,0 +1,12 @@
+default: &default
+  animal_guess_uri: 'localhost:5000'
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+  animal_guess_uri: 'localhost:80'

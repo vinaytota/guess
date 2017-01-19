@@ -1,0 +1,60 @@
+<div class="container">
+<h4>Let's play a guessing game</h4>
+    <%= form_tag({}, id: 'personalInfoForm') do %>
+        <div class="row">
+        <p>I am</p>
+        </div>
+        <div class="form-inline form-group row">
+            <input id="heightFt" name="height_ft" type="text" class="form-control" />
+            <label class="mr-sm-2 ml-sm-2" for="heightFt">ft</label>
+        </div>
+        <div class="form-inline form-group row">
+            <input id="heightIn" name="height_in" type="text" class="form-control" />
+            <label class="mr-sm-2 ml-sm-2" for="heightFt">in</label>
+        </div>
+        <div class="row"></div>
+        <div class="row">
+        <p>and weigh</p>
+        </div>
+        <div class="form-group row">
+            <input id="weightLb" name="weight_lb" type="text" class="form-control" style="width:inherit" />
+            <label class="mr-sm-2 ml-sm-2" for="weightLb">lb</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    <% end %>
+</div>
+<script>
+    $(document).ready(function() {
+        $.validator.addMethod("ltTwelve", function(value, element, params) {
+            return value < 12;
+        }, "Please enter a value less than 12");
+
+
+        $( "#personalInfoForm" ).validate({
+          rules: {
+            height_ft: {
+              required: true,
+              digits: true
+            },
+            height_in: {
+                required: true,
+                digits: true,
+                ltTwelve: true
+            },
+            weight_lb: {
+                required: true,
+                digits: true,
+            }
+          },
+          errorPlacement: function(error, element) {
+            $(element).parent().append(error);
+          },
+          highlight: function(element, errorClass) {
+            $(element).parent().addClass("has-danger");
+          },
+          unhighlight: function(element, errorClass) {
+            $(element).parent().removeClass("has-danger");
+          },
+        });
+    })
+</script>

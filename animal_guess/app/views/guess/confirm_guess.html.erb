@@ -1,0 +1,12 @@
+<div class="container">
+<h4>Based on that data, I think your favorite animal is: <%= @animal_guess.name %> </h4>
+
+	<%= form_tag do %>
+		<div class="form-inline row">
+			<button name="animal_id" value="<%= @animal_guess.id %>" type="submit" class="btn btn-primary mr-sm-2 confirmGuess">Yes</button>
+			<% @other_animals.each do |other_animal| %>
+				<button name="animal_id" value="<%= other_animal.id %>" type="submit" class="btn btn-secondary mr-sm-2 correctGuess">No, my favorite is: <%= other_animal.name %></button>
+			<% end %>
+		</div>
+	<% end %>
+</div>
